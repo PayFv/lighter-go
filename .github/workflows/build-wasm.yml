@@ -18,7 +18,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.21'
+          go-version: '1.23'
           
       - name: Cache Go modules
         uses: actions/cache@v3
@@ -37,7 +37,14 @@ jobs:
           
       - name: Copy wasm_exec.js
         run: |
-          cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" wasm/
+          if [ -f "$(go env GOROOT)/misc/wasm/wasm_exec.js" ]; then
+            cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" wasm/
+          elif [ -f "$(go env GOROOT)/lib/wasm/wasm_exec.js" ]; then
+            cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" wasm/
+          else
+            echo "Error: wasm_exec.js not found"
+            exit 1
+          fi
 
       - name: Upload WASM artifacts
         uses: actions/upload-artifact@v4
