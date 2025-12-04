@@ -10,7 +10,7 @@ async function main() {
 
   // 示例 1: 生成 API Key
   console.log('=== Example 1: Generate API Key ===');
-  const seed = 'your-seed-phrase-here';
+  const seed = 'REPLACE_WITH_YOUR_ACTUAL_SEED_PHRASE_HERE_DO_NOT_USE_THIS_DEFAULT';
   const apiKeyResult = GenerateAPIKey(seed);
   
   if (apiKeyResult.error) {
