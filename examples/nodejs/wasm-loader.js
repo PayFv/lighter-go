@@ -5,9 +5,11 @@ const path = require('path');
 require(path.join(__dirname, '../../wasm/wasm_exec.js'));
 
 class WASM {
-  constructor() {
+  constructor(options = {}) {
     this.go = null;
     this.instance = null;
+    // 可配置的初始化延迟时间（毫秒），默认 100ms
+    this.initDelay = options.initDelay || 100;
   }
 
   async init(wasmPath) {
@@ -26,8 +28,8 @@ class WASM {
     this.go.run(this.instance);
     
     // 等待一小段时间确保 Go 的 main() 函数已经执行并注册了所有函数
-    // 通常几毫秒就足够了，但为了稳定性我们等待 100ms
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // 默认 100ms 通常足够，但可以通过构造函数配置调整
+    await new Promise(resolve => setTimeout(resolve, this.initDelay));
     
     return this;
   }

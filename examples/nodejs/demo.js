@@ -10,7 +10,15 @@ async function main() {
 
   // 示例 1: 生成 API Key
   console.log('=== Example 1: Generate API Key ===');
-  const seed = 'REPLACE_WITH_YOUR_ACTUAL_SEED_PHRASE_HERE_DO_NOT_USE_THIS_DEFAULT';
+  const seed = process.env.SEED_PHRASE || 'REPLACE_WITH_YOUR_ACTUAL_SEED_PHRASE_HERE_DO_NOT_USE_THIS_DEFAULT';
+  
+  // 安全检查：防止使用默认的占位符种子短语
+  if (seed.includes('REPLACE_WITH') || seed.includes('DO_NOT_USE')) {
+    console.warn('\n⚠️  WARNING: You are using the default placeholder seed phrase!');
+    console.warn('This is for demonstration purposes only.');
+    console.warn('For actual use, set the SEED_PHRASE environment variable or modify the code.\n');
+  }
+  
   const apiKeyResult = GenerateAPIKey(seed);
   
   if (apiKeyResult.error) {
