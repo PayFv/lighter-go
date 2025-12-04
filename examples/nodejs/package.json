@@ -1,0 +1,19 @@
+{
+  "name": "lighter-wasm-demo",
+  "version": "1.0.0",
+  "description": "Demo for using lighter-go WASM in Node.js",
+  "main": "demo.js",
+  "scripts": {
+    "demo": "node demo.js"
+  },
+  "keywords": [
+    "wasm",
+    "lighter",
+    "trading"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
